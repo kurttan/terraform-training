@@ -9,7 +9,7 @@ phases:
       - echo "Get Current Account ID"
       - src_account_id=$(echo $CODEBUILD_BUILD_ARN | cut -d':' -f5)
       - echo "Logging in to the pre_build Amazon ECR in ..."
-      - $(aws ecr get-login --no-include-email --registry-ids ${src_account_id} --region "us_east-2"
+      - $(aws ecr get-login --no-include-email --registry-ids ${src_account_id} --region "us-east-2")
   build:
     commands:
       - echo "Build started on `date`"
