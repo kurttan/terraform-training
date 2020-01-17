@@ -6,10 +6,17 @@ phases:
       docker: 18
   pre_build:
     commands:
-      - echo Intsall some tools
+      - echo "Get Current Account ID"
+      - src_account_id=$(echo $CODEBUILD_BUILD_ARN | cut -d':' -f5)
+      - echo "Logging in to the pre_build Amazon ECR in ..."
+      - $(aws ecr get-login --no-include-email --registry-ids ${src_account_id} --region "us_east-2"
   build:
     commands:
-      - echo Build application image
+      - echo "Build started on `date`"
+      - echo "Building the Docker image..."
+      - docker build -t demo-app .
+      - docker tag demo-app:latest 922371317609.dkr.ecr.us-east-2.amazonaws.com/training-app
   post_build:
     commands:
-      - echo Publish application image in ECR
+      - echo "Pushing the Docker image..."
+      - docker push 922371317609.dkr.ecr.us-east-2.amazonaws.com/training-app
