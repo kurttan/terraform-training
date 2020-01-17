@@ -3,13 +3,13 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-	  docker: 18
+      docker: 18
   pre_build:
     commands:
-	  - echo Intsall some tools
+      - echo Intsall some tools
   build:
     commands:
-	  - echo Build application image
+      - echo Build application image
   post_build:
     commands:
-	  - echo Publish application image in ECR
+      - echo Publish application image in ECR
